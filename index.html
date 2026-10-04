@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="position-sticky z-2 top-0">
+        <nav class="navbar navbar-expand navbar-light">
+            <div class="container">
+                <div class="logo-navbar-brand d-flex align-items-center justify-content-center">
+                    <div class="logo d-flex justify-content-center align-items-center">
+                        <i class="fa-solid fa-address-book text-white"></i>
+                    </div>
+                    <div class="navbar-brand">
+                        <h1 class="m-0 fw-bold fs-4">Contact<span>Hub</span></h1>
+                        <p class="m-0 fw-medium">Smart Contact Manager</p>
+                    </div>
+                </div>
+
+                <div class="navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto d-flex align-items-center gap-3">
+                        <li class="nav-item active">
+                            <button id="addContact" onclick="displayingContactorm()"
+                                class="add-btn border-0 text-white fw-semibold">
+                                <i class="fa-solid fa-plus me-2"></i><span>Add <span class="contact-word">Contact</span></span>
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-btns border-0 bg-white"><i class="fa-solid fa-bell"></i></button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-btns border-0 bg-white"><i class="fa-solid fa-gear"></i></button>
+                        </li>
+                        <li class="nav-item">
+                            <img class="w-100" src="images/avatar-4.jpg" alt="avatar">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="quick-stats py-4">
+                <div class="total-fav-emergency row g-3 flex-sm-row flex-column">
+                    <div class="div-content col-sm-4 col-12 total-div">
+                        <div class="content-inner bg-white rounded-4 d-flex gap-3">
+                            <div class="icon users d-flex justify-content-center align-items-center"><i
+                                    class="fa-solid fa-users text-white"></i></div>
+                            <div class="stats text-truncate">
+                                <p class="stat-title m-0 fw-medium text-uppercase text-truncate">total</p>
+                                <p id="totalCount" class="stat-number fs-4 m-0 fw-bold">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="div-content col-sm-4 col-12">
+                        <div class="content-inner bg-white rounded-4 d-flex gap-3">
+                            <div class="icon star d-flex justify-content-center align-items-center"><i
+                                    class="fa-solid fa-star text-white"></i></i></div>
+                            <div class="stats text-truncate">
+                                <p class="stat-title m-0 fw-medium text-uppercase text-truncate">favorites</p>
+                                <p id="favoritesCount" class="stat-number fs-4 m-0 fw-bold">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="div-content col-sm-4 col-12">
+                        <div class="content-inner bg-white rounded-4 d-flex gap-3">
+                            <div class="icon heart-pulse d-flex justify-content-center align-items-center"><i
+                                    class="fa-solid fa-heart-pulse text-white"></i></div>
+                            <div class="stats text-truncate">
+                                <p class="stat-title m-0 fw-medium text-uppercase text-truncate">emergency</p>
+                                <p id="emergencyCount" class="stat-number fs-4 m-0 fw-bold">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="all-contacts">
+                <div class="row mb-5">
+                    <div class="contacts-part col-8">
+                        <div class="contacts-heading">
+                            <h2 class="m-0 fw-bold">All Contacts</h2>
+                            <p class="mt-1 m-0">Manage and organize your <span id="totalContactsText">0</span> contacts
+                            </p>
+                        </div>
+                        <div class="search-input position-relative"><input id="search" oninput="displaySearch()"
+                                type="text" class="w-100" placeholder="Search by name,phone,or email..."><i
+                                class="fa-solid fa-magnifying-glass position-absolute"></i></div>
+
+                        <div class="contact-cards row g-3" id="rowCards">
+
+                        </div>
+                    </div>
+                    <div class="favorites-emergency col-4 position-sticky h-100">
+                        <div class="favorites rounded-4 overflow-hidden">
+                            <div class="fav-header d-flex align-items-center">
+                                <div
+                                    class="fav-icon d-flex justify-content-center align-items-center text-white rounded-3">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="fav-info">
+                                    <h2 class="m-0 fs-6 fw-semibold">Favorites</h2>
+                                    <p class="m-0">Quick access to starred contacts</p>
+                                </div>
+                            </div>
+
+                            <div class="favorites-content" id="favoritesContent">
+
+                            </div>
+                        </div>
+                        <div class="emergency rounded-4 overflow-hidden">
+                            <div class="emergency-header d-flex align-items-center">
+                                <div
+                                    class="emergency-icon d-flex justify-content-center align-items-center text-white rounded-3">
+                                    <i class="fa-solid fa-heart-pulse"></i>
+                                </div>
+                                <div class="emergency-info">
+                                    <h2 class="m-0 fs-6 fw-semibold">Emergency</h2>
+                                    <p class="m-0">Important contacts for urgent challs</p>
+                                </div>
+                            </div>
+
+                            <div class="emergency-content" id="emergencyContent">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+    <div id="formContainer" class="form-container z-3 position-fixed w-100 top-0 d-none bottom-0">
+        <div class="blur w-100 h-100"></div>
+        <section
+            class="contact-form-part w-100 position-fixed top-0 bottom-0 p-3 d-flex justify-content-center align-items-center">
+            <div class="contact-form-content position-relative w-100 bg-white rounded-4">
+
+                <div
+                    class="contact-form-heading py-3 px-4 position-sticky d-flex justify-content-between align-items-center bg-white">
+                    <h2 class="m-0 fw-bold fs-5">Add New Contact</h2>
+                    <button type="button" onclick="disapperingContactForm()"
+                        class="d-flex justify-content-center align-items-center border-0 rounded-3 bg-transparent"><i
+                            class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div class="contact-form p-4">
+                    <div class="avatar-image-part d-flex flex-column align-items-center pb-2">
+                        <div id="profile-icon"
+                            class="avatar-icon fw-bold text-white overflow-hidden rounded-circle d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <label for="avatar-photo" class="py-2 px-3 d-flex align-items-center rounded-3 fw-medium gap-2">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>Change Photo</span>
+                            <input type="file" id="avatar-photo" onchange="displayImage();" name="avatar-image" class="d-none" accept="image/*">
+                        </label>
+                        <p id="msgImage" class="valid-msg d-none color-rose-500 text-size-sm mb-0">Please select a valid image file</p>
+                    </div>
+
+                    <div class="form-div">
+                        <label class="fw-medium">Full Name <span>*</span></label>
+                        <input id="fullName" oninput="validation(this , 'msgName')" type="text" name="full-name"
+                            placeholder="Enter full name" class="w-100">
+                        <p id="msgName" class="valid-msg d-none color-rose-500 text-size-sm mb-0">Name should contain
+                            only letters
+                            and spaces (2-50 characters)</p>
+                    </div>
+
+                    <div class="form-div">
+                        <label class="fw-medium">Phone Number <span>*</span></label>
+                        <input id="telephoneNumber" oninput="validation(this , 'msgPhone')" type="tel"
+                            name="telephone-number" placeholder="e.g., 01012345678" class="w-100">
+                        <p id="msgPhone" class="valid-msg d-none color-rose-500 text-size-sm mb-0">Please enter a valid
+                            Egyptian
+                            phone number</p>
+                    </div>
+
+                    <div class="form-div">
+                        <label class="fw-medium">Email Address</label>
+                        <input id="emailPart" oninput="validation(this , 'msgEmail')" type="email" name="emailAdd"
+                            placeholder="name@example.com" class="w-100">
+                        <p id="msgEmail" class="valid-msg d-none color-rose-500 text-size-sm mb-0">Please enter a valid
+                            email
+                            address</p>
+                    </div>
+
+                    <div class="form-div">
+                        <label class="fw-medium">Address</label>
+                        <input id="theAddress" type="text" name="address" placeholder="Enter address" class="w-100">
+                    </div>
+
+                    <div class="form-div">
+                        <label for="contactGroup" class="fw-medium">Group</label>
+                        <select id="SelectGroup" name="relatedGroup" id="contactGroup" class="w-100">
+                            <option value="select-a-group">Select a group</option>
+                            <option value="family">Family</option>
+                            <option value="friends">Friends</option>
+                            <option value="work">Work</option>
+                            <option value="school">School</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-div">
+                        <label for="descriptionNote" class="fw-medium">Notes</label>
+                        <textarea id="notePart" name="note" rows="2" id="descriptionNote"
+                            placeholder="Add notes about this contact" class="w-100"></textarea>
+                    </div>
+
+                    <div class="form-div checkbox d-flex flex-wrap gap-3 py-2">
+                        <div class="form-div-checkbox d-flex align-items-center gap-2">
+                            <input id="favoriteBox" type="checkbox" id="fav">
+                            <label for="fav" class="fw-medium m-0 favorite-label"><i
+                                    class="fa-solid fa-star me-1"></i>Favorite</label>
+                        </div>
+                        <div class="form-div-checkbox d-flex align-items-center gap-2">
+                            <input id="emergencyBox" type="checkbox" id="emergency">
+                            <label for="emergency" class="fw-medium m-0 emergency-label"><i
+                                    class="fa-solid fa-heart-pulse me-1"></i>Emergency</label>
+                        </div>
+                    </div>
+
+                    <div class="form-buttons d-flex pt-2">
+                        <button onclick="clearInputs()" id="cancelButton" type="button"
+                            class="cancel border-0 w-100 fw-semibold">Cancel</button>
+                        <button onclick="addContact()" id="submitButton" type="submit"
+                            class="submit save w-100 fw-semibold text-white border-0"><i
+                                class="fa-solid fa-check me-2"></i>Save Contact</button>
+                        <button onclick="updateContact()" id="updateButton"
+                            class="submit d-none save w-100 fw-semibold text-white border-0"><i
+                                class="fa-solid fa-check me-2"></i>Save Contact</button>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
